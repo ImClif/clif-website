@@ -29,10 +29,18 @@ import { Icon } from "astro-icon/components";
       </div>
       <div class="flex justify-between items-start">
         <div class="flex py-1 gap-1">
-          <Icon name="github" />
-          <Icon name="discord" />
-          <Icon name="kick" />
-          <Icon name="email" />
+          <a href="/">
+            <Icon name="github" />
+          </a>
+          <a href="/">
+            <Icon name="discord" />
+          </a>
+          <a href="/">
+            <Icon name="kick" />
+          </a>
+          <a href="mailto:email@mail.com"> 
+            <Icon name="email" />
+          </a>
         </div>
         <div>2024</div>
       </div>
@@ -63,6 +71,7 @@ import { Icon } from "astro-icon/components";
   }
 
   .bg {
+    pointer-events: none;
     position: absolute;
     background: conic-gradient(
       from 180deg at 50% 70%,
