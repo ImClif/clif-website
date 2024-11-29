@@ -1,0 +1,30 @@
+on:
+  push:
+    branches:
+      - 'main'
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3
+    - name: Use Node.js 18
+      uses: actions/setup-node@v3
+    - name: Setup PNPM
+      uses: pnpm/action-setup@v2
+      with:
+        version: latest
+    - name: 🔨 Build Project
+      run: |
+        pnpm i
+        pnpm build
+    - name: 📂 Sync files with FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./dist/
+        server-dir: public_html/
